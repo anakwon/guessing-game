@@ -2,38 +2,32 @@
 <html>
   <head>
     <meta charset="utf-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guessing Game!</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+
+    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-    <style>
-      html {
-        font-family: sans-serif;
-      }
-      body {
-        width: 50%;
-        max-width: 800px;
-        min-width: 480px;
-        margin: 0 auto;
-      }
-      .lastResult {
-        color: white;
-        padding: 3px;
-      }
-    </style>
   </head>
 
   <body>
-      <h1>Number guessing game</h1>
+      <h1 class="text-center">The Guessing game</h1>
 
-      <p>Pick a number from 1-100 and see if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.</p>
+      <p class="text-center">Pick a number from 1-100 and see if you can guess it in 10 turns or fewer.</br> 
+      We'll tell you if your guess was too high or too low.</p>
 
-<div class="form">
-  <label for="guessField">Enter a guess: </label><input type="text" id="guessField" class="guessField">
-  <input type="submit" value="Submit guess" class="guessSubmit">
+<div class="form text-center">
+  <label for="guessField">Enter a guess: </label>
+  <input type="text" id="guessField" class="guessField btn">
+  <input type="submit" value="Submit guess" class="guessSubmit btn">
 </div>
 
 <div class="resultParas">
@@ -44,7 +38,10 @@
 
 <script>
   
-  var randomNumber = Math.floor (Math.random() * 100) + 1; //why *100 +1? 
+  var randomNumber = Math.floor (Math.random() * 100) + 1; 
+  //.floor lowers the decimal point (ex 3.7 -> 3) 
+  // to pick a random number between 1-100 you have to multiply by 100
+  // and add one to raise the decimal point.
   var guesses = document.querySelector ('.guesses');
   var lastResult = document.querySelector ('.lastResult');
   var lowOrHi = document.querySelector ('.lowOrHi');
@@ -60,25 +57,29 @@
   	var userGuess = Number(guessField.value);
   	if (guessCount === 1) {
   		guesses.textContent = 'Previous guesses: ';
+      guesses.style.textAlign = 'center';
   	  }
   	guesses.textContent += userGuess + ' ' ;
 
   	if (userGuess === randomNumber) {
   		lastResult.textContent = 'Congratulations! You got it right!';
-  		lastResult.style.backgroundColor = 'green';
+  		lastResult.style.backgroundColor = '#50b7ba';
   		lowOrHi.textContent = '';
   		setGameOver();
   	} else if (guessCount === 10) {
-  		lastResult.textContent = '!!!Game Over!';
+  		lastResult.textContent = 'Game Over!!';
   		setGameOver();
   	} else {
   		lastResult.textContent = 'WRONG!';
-  		lastResult.style.backgroundColor = 'red';
+  		lastResult.style.backgroundColor = '#fba292';
   		lastResult.style.fontSize = '20px';
+      lastResult.style.textAlign = 'center'
   		if (userGuess < randomNumber){
-  			lowOrHi.textContent = 'Too Low!';
+  			lowOrHi.textContent = 'Your number was too low! Guess something higher ;) ';
+        lowOrHi.style.textAlign = 'center';
   		} else if (userGuess > randomNumber){
-  			lowOrHi.textContent = 'Too High!';  		
+  			lowOrHi.textContent = 'Your number was too high! Guess something lower ;)';
+        lowOrHi.style.textAlign = 'center';  		
   		}
   }
 
@@ -93,7 +94,9 @@ function setGameOver(){
 	guessField.disabled = 'true';
 	guessSubmit.disabled = 'true';
 	resetButton = document.createElement('button');
-	resetButton.textContent = 'Start New Game';
+  resetButton.textContent = 'Start New Game';
+  resetButton.style.textAlign ='center';
+  resetButton.className = 'btn';
 	document.body.appendChild(resetButton);
 	resetButton.addEventListener('click', resetGame);
 }

@@ -1,0 +1,25 @@
+*{
+	font-family: 'Josefin Slab', serif;
+}
+body{
+	background-color:#D2E8EE;
+	width: 50%;
+	max-width: 800px;
+	min-width: 480px;
+	margin: 0 auto;
+	margin-top: 5em;
+}
+
+h1{
+	 text-shadow: 4px 4px 4px #aaa;
+	 font-family: 'Josefin Slab', serif;
+}
+
+.lastResult {
+        color: white;
+        padding: 3px;
+      }
+.guessSubmit{
+	color:#fff;
+	background-color:#cabbd8;
+}
